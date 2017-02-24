@@ -1,0 +1,15 @@
+CC := gcc
+ifeq ($(compile), debug)
+	CFLAGS := -O2 -Wall -g
+else
+	CFLAGS := -O2 -Wall
+endif
+LDFLAGS = -lm
+.PHONY : subdirs $(SUBDIRS)
+subdirs : $(SUBDIRS)
+$(SUBDIRS) :
+	$(MAKE) -C $@ all
+
+%.o : %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $(OBJDIRS)/$@
+
